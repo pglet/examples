@@ -6,5 +6,3 @@ const pglet = require("pglet");
     await p.send("clean");
     await p.send("add text value='Hello, world!'");
 })();
-
-console.log('Done!')
