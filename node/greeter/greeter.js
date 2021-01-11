@@ -1,7 +1,7 @@
 const pglet = require("pglet");
 
 (async () => {
-    p = await pglet.page("greeter");
+    let p = await pglet.page("greeter");
 
     let txt_name = await p.send("add textbox label='Your name' description='Please provide your full name'");
     let btn_hello = await p.send("add button primary text='Say hello'");
