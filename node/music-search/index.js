@@ -16,8 +16,8 @@ const mbApi = new MusicBrainzApi({
     baseUrl: 'https://musicbrainz.org'
 });
 
-var query = {};
-var result = {};
+let query = {};
+let result = {};
 
 if ('artist' in args) {
 
@@ -42,45 +42,43 @@ if ('album' in args) {
     let p = await pglet.page();
     await p.send(`
         add to=page at=0
-        stack width = 600px horizontalAlign=stretch
+        stack id=search width=400px horizontalAlign=stretch
           text value='Search MusicBrainz - The Open Music Encyclopedia'
-          dropdown id=searchBy label='Search'
+          textbox id=string label='Search for...'
+          dropdown id=dropdown label='By'
             option key=artist text=artist
             option key=album text=album
+          button id=button primary text=Search data=search_btn
+
     `)
-    //await p.send("add text value=test");
-    //await p.send("add stack id=query");
-    //const response = await p.send("add to=query\n text id=test value=\"Search by \"");
-    //console.log(response);
-
-    //await p.send("add dropdown to=query value=artist");
-
-    //await p.send("add textbox to=query");
 
     while(true) {
         const e = await p.waitEvent();
+        // if (e._data == 'artist') {
+        //     console.log('artist search');
+        // }
+        // if (e._data == 'album') {
+        //     console.log('album search');
+        // }
+        let searchType;
+        if (e._target == 'search:dropdown') {
+            searchType = e._data;
+        }
+        
+        if (e._target == 'search:button') {
+            let searchString = await p.send(`
+                get search:string value 
+            `)
+            
+            query[searchType] = searchString;
+            let returnData = await mbApi.searchRelease(query, 0, 10);
+            Object.assign(result, returnData);
+        }
+        console.log(result);
+
         console.log(e);
     }
 
 })();
-// add to=page at=0
-// stack width=600px horizontalAlign=stretch
-//   textbox id=fullName align=right value='someone' label=Name placeholder='Your name, please' description='That\'s your name'
-//   textbox id=bio label='Bio' description='A few words about yourself' value='Line1\nLine2' multiline=true
-//   dropdown id=color label='Your favorite color' placeholder='Select color'
-//     option key=red text=Red
-//     option key=green text=Green
-//     option key=blue text=Blue
-//   checkbox id=agree label='I agree to the terms of services'
 
-// pglet.page().then((con) => {
-//     con.send("add textbox id=query").then(() => {
-//         while(true) {
-//             con.waitEvent().then((e) => {
-//                 console.log(e);
-//             });
-            
-//         }
-//     });
-    
-// });
+
