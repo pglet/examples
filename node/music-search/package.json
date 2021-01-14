@@ -12,6 +12,6 @@
     "axios": "^0.21.1",
     "minimist": "^1.2.5",
     "musicbrainz-api": "^0.5.2",
-    "pglet": "^0.1.6"
+    "pglet": "^0.1.13"
   }
 }

@@ -47,34 +47,58 @@ if ('album' in args) {
           textbox id=string label='Search for...'
           dropdown id=dropdown label='By'
             option key=artist text=artist
-            option key=album text=album
+            option key=release text=album
           button id=button primary text=Search data=search_btn
 
+          
     `)
-
+    let searchType;
     while(true) {
         const e = await p.waitEvent();
-        // if (e._data == 'artist') {
+        // if (e._data == 'artists') {
         //     console.log('artist search');
         // }
-        // if (e._data == 'album') {
+        // if (e._data == 'releases') {
         //     console.log('album search');
         // }
-        let searchType;
+
         if (e._target == 'search:dropdown') {
             searchType = e._data;
         }
-        
+
         if (e._target == 'search:button') {
             let searchString = await p.send(`
                 get search:string value 
             `)
             
             query[searchType] = searchString;
-            let returnData = await mbApi.searchRelease(query, 0, 10);
+            let returnData = (searchType == 'artist') ? await mbApi.searchArtist(query, 0, 10) : await mbApi.searchRelease(query, 0, 10);
             Object.assign(result, returnData);
+            let returnArray = result[(searchType + 's')];
+            
+            //console.log(returnArray);
+            
+            // returnArray.forEach(async element => {
+            //     await p.send(`
+            //         add text value="${element.name}"
+            //     `)
+            // });
+            for (i=0; i < returnArray.length; i++) {
+                await p.send(`
+                         add text value="${returnArray[i].name}"
+                `)
+            }
         }
-        console.log(result);
+
+        // console.log(result);
+        // console.log('\n\n\n\n');
+        // console.log(result[(searchType+'s')]);
+        // result[(searchType + 's')].foreach(async element => {
+        //     await p.send(`
+        //         add to=page at=1
+        //         text value=${element.name}
+        //     `)
+        // });
 
         console.log(e);
     }
