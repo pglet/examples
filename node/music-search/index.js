@@ -41,9 +41,11 @@ if ('album' in args) {
     
     let p = await pglet.page();
     await p.send(`
-        add to=page at=0
-        stack id=search width=400px horizontalAlign=stretch
-          text value='Search MusicBrainz - The Open Music Encyclopedia'
+        add to=page at=0 text size=medium bold=true value='Search MusicBrainz - The Open Music Encyclopedia'
+    `)
+    await p.send(`
+        add to=page at=1
+        stack id=search width=800px horizontal=true horizontalAlign=end
           textbox id=string label='Search for...'
           dropdown id=dropdown label='By'
             option key=artist text=artist
@@ -55,39 +57,43 @@ if ('album' in args) {
     let searchType;
     while(true) {
         const e = await p.waitEvent();
-        // if (e._data == 'artists') {
-        //     console.log('artist search');
-        // }
-        // if (e._data == 'releases') {
-        //     console.log('album search');
-        // }
 
         if (e._target == 'search:dropdown') {
             searchType = e._data;
         }
 
-        if (e._target == 'search:button') {
+        if (e._target == 'search:button' && searchType == 'artist') {
+            await p.send(`
+                add spinner to=search id=searchspinner label="search executing"
+            `) 
+
             let searchString = await p.send(`
                 get search:string value 
             `)
             
             query[searchType] = searchString;
             let returnData = (searchType == 'artist') ? await mbApi.searchArtist(query, 0, 10) : await mbApi.searchRelease(query, 0, 10);
+
             Object.assign(result, returnData);
             let returnArray = result[(searchType + 's')];
             
-            //console.log(returnArray);
+            console.log(returnArray);
             
             // returnArray.forEach(async element => {
             //     await p.send(`
             //         add text value="${element.name}"
             //     `)
             // });
+           
             for (i=0; i < returnArray.length; i++) {
                 await p.send(`
                          add text value="${returnArray[i].name}"
                 `)
             }
+            await p.send(`
+                remove search:searchspinner
+            `)
+            
         }
 
         // console.log(result);
