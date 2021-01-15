@@ -4,17 +4,19 @@ const axios = require('axios');
 const parser = require('minimist');
 const MusicBrainzApi = require('musicbrainz-api').MusicBrainzApi;
 const pglet = require('pglet');
+const mbApi = require('./mbApi.js');
+
 
 const args = parser(process.argv.slice(2));
 
-const url = "https://musicbrainz.org/ws/2";
+// const url = "https://musicbrainz.org/ws/2";
 
-const mbApi = new MusicBrainzApi({
-    appName: 'node-demo-app',
-    appVersion: '0.1.0',
-    appContactInfo: 'britzkopf@gmail.com',
-    baseUrl: 'https://musicbrainz.org'
-});
+// const mbApi = new MusicBrainzApi({
+//     appName: 'node-demo-app',
+//     appVersion: '0.1.0',
+//     appContactInfo: 'britzkopf@gmail.com',
+//     baseUrl: 'https://musicbrainz.org'
+// });
 
 let query = {};
 let result = {};
@@ -63,66 +65,17 @@ if ('album' in args) {
         }
 
         if (e._target == 'search:button' && searchType == 'artist') {
-            await p.send(`
-                add spinner to=search id=searchspinner label="search executing"
-            `) 
-
             let searchString = await p.send(`
                 get search:string value 
             `)
-            
-            query[searchType] = searchString;
-            let returnData = await mbApi.searchArtist(query, 0, 10);
-
-            Object.assign(result, returnData);
-            let returnArray = result[(searchType + 's')];
-            console.log(returnArray);
-
-            /* ? why doesn't this work ? 
-
-            returnArray.forEach(async element => {
-                await p.send(`
-                    add text value="${element.name}"
-                `)
-            });*/
-           
-            for (i=0; i < returnArray.length; i++) {
-                await p.send(`
-                         add text value="${returnArray[i].name}"
-                `)
-            }
-            await p.send(`
-                remove search:searchspinner
-            `)
-            
+            await mbApi.queryArtist(p, searchString)          
         }
 
         if (e._target == 'search:button' && searchType == 'release') {
-            await p.send(`
-                add spinner to=search id=searchspinner label="search executing"
-            `) 
-
             let searchString = await p.send(`
                 get search:string value 
             `)
-            
-            query[searchType] = searchString;
-            let returnData = await mbApi.searchRelease(query, 0, 10);
-
-            Object.assign(result, returnData);
-            let returnArray = result[(searchType + 's')];       
-            console.log(returnArray);
-
-           
-            for (i=0; i < returnArray.length; i++) {
-                await p.send(`
-                         add text value="${returnArray[i].title}"
-                `)
-            }
-            await p.send(`
-                remove search:searchspinner
-            `)
-            
+            await mbApi.queryAlbum(p, searchString)            
         }
 
         console.log(e);
