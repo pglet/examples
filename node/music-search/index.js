@@ -41,16 +41,16 @@ if ('album' in args) {
     
     let p = await pglet.page();
     await p.send(`
-        add to=page at=0 text size=medium bold=true value='Search MusicBrainz - The Open Music Encyclopedia'
+        add to=page at=0 text size=large bold=true value='Search MusicBrainz - The Open Music Encyclopedia' margin="1em 0em"
     `)
     await p.send(`
         add to=page at=1
-        stack id=search width=800px horizontal=true horizontalAlign=end
-          textbox id=string label='Search for...'
-          dropdown id=dropdown label='By'
+        stack id=search width=100% horizontal=true horizontalAlign=center 
+          textbox id=string label='Search for...' width=400px
+          dropdown id=dropdown label='By' width=200px
             option key=artist text=artist
             option key=release text=album
-          button id=button primary text=Search data=search_btn
+          button id=button primary text=Search data=search_btn width=100px margin=2em
 
           
     `)
@@ -72,18 +72,19 @@ if ('album' in args) {
             `)
             
             query[searchType] = searchString;
-            let returnData = (searchType == 'artist') ? await mbApi.searchArtist(query, 0, 10) : await mbApi.searchRelease(query, 0, 10);
+            let returnData = await mbApi.searchArtist(query, 0, 10);
 
             Object.assign(result, returnData);
             let returnArray = result[(searchType + 's')];
-            
             console.log(returnArray);
-            
-            // returnArray.forEach(async element => {
-            //     await p.send(`
-            //         add text value="${element.name}"
-            //     `)
-            // });
+
+            /* ? why doesn't this work ? 
+
+            returnArray.forEach(async element => {
+                await p.send(`
+                    add text value="${element.name}"
+                `)
+            });*/
            
             for (i=0; i < returnArray.length; i++) {
                 await p.send(`
@@ -96,15 +97,33 @@ if ('album' in args) {
             
         }
 
-        // console.log(result);
-        // console.log('\n\n\n\n');
-        // console.log(result[(searchType+'s')]);
-        // result[(searchType + 's')].foreach(async element => {
-        //     await p.send(`
-        //         add to=page at=1
-        //         text value=${element.name}
-        //     `)
-        // });
+        if (e._target == 'search:button' && searchType == 'release') {
+            await p.send(`
+                add spinner to=search id=searchspinner label="search executing"
+            `) 
+
+            let searchString = await p.send(`
+                get search:string value 
+            `)
+            
+            query[searchType] = searchString;
+            let returnData = await mbApi.searchRelease(query, 0, 10);
+
+            Object.assign(result, returnData);
+            let returnArray = result[(searchType + 's')];       
+            console.log(returnArray);
+
+           
+            for (i=0; i < returnArray.length; i++) {
+                await p.send(`
+                         add text value="${returnArray[i].title}"
+                `)
+            }
+            await p.send(`
+                remove search:searchspinner
+            `)
+            
+        }
 
         console.log(e);
     }
