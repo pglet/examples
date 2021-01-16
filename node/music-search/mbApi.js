@@ -13,7 +13,7 @@ const mbApi = new MusicBrainzApi({
 async function queryArtist(p, searchString) {
 
     await p.send(`
-        add spinner to=search id=searchspinner label="search executing"
+        add spinner to=results id=searchspinner label="search executing"
     `) 
     
     let query = {};
@@ -34,11 +34,11 @@ async function queryArtist(p, searchString) {
     
     for (i=0; i < returnArray.length; i++) {
         await p.send(`
-                    add text value="${returnArray[i].name}"
+                    add text to=results value="${returnArray[i].name}"
         `)
     }
     await p.send(`
-        remove search:searchspinner
+        remove results:searchspinner
     `)
 
 }
@@ -46,7 +46,7 @@ async function queryArtist(p, searchString) {
 async function queryAlbum(p, searchString) {
 
     await p.send(`
-        add spinner to=search id=searchspinner label="search executing"
+        add spinner to=results id=searchspinner label="search executing"
     `) 
 
     let query = {};
@@ -60,11 +60,11 @@ async function queryAlbum(p, searchString) {
     
     for (i=0; i < returnArray.length; i++) {
         await p.send(`
-                    add text value="${returnArray[i].title}"
+                    add text to=results value="${returnArray[i].title}"
         `)
     }
     await p.send(`
-        remove search:searchspinner
+        remove results:searchspinner
     `)
 
 }

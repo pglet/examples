@@ -42,9 +42,11 @@ if ('album' in args) {
 (async () => {
     
     let p = await pglet.page();
+
     await p.send(`
         add to=page at=0 text size=large bold=true value='Search MusicBrainz - The Open Music Encyclopedia' margin="1em 0em"
     `)
+
     await p.send(`
         add to=page at=1
         stack id=search width=100% horizontal=true horizontalAlign=center 
@@ -52,10 +54,15 @@ if ('album' in args) {
           dropdown id=dropdown label='By' width=200px
             option key=artist text=artist
             option key=release text=album
-          button id=button primary text=Search data=search_btn width=100px margin=2em
-
-          
+          button id=button primary text=Search data=search_btn width=100px margin=2em        
     `)
+
+    await p.send(`
+        add to=page at=2
+        text size=medium bold=true value='Search Results'
+        stack id=results width=100%      
+    `)
+
     let searchType;
     while(true) {
         const e = await p.waitEvent();
