@@ -10,10 +10,10 @@ const mbApi = new MusicBrainzApi({
     baseUrl: 'https://musicbrainz.org'
 });
 
-async function queryArtist(p, searchString) {
+async function queryArtists(p, searchString) {
 
     await p.send(`
-        add spinner to=results id=searchspinner label="search executing"
+        add spinner to=results at=0 id=searchspinner label="search executing"
     `) 
     
     let query = {};
@@ -43,24 +43,27 @@ async function queryArtist(p, searchString) {
 
 }
 
-async function queryAlbum(p, searchString) {
+async function queryAlbums(p, searchString) {
 
     await p.send(`
         add spinner to=results id=searchspinner label="search executing"
     `) 
 
     let query = {};
-    query['release'] = searchString;
+    query['release-group'] = searchString;
 
-    let returnData = await mbApi.searchRelease(query, 0, 10);
-
-    let returnArray = returnData['releases'];       
+    let returnData = await mbApi.searchReleaseGroup(query, 0, 10);
+    console.log(returnData);
+    let returnArray = returnData['release-groups'];       
     console.log(returnArray);
 
     
     for (i=0; i < returnArray.length; i++) {
+        // let album = await queryAlbum(returnArray[i].id);
+        // console.log("....album.....");
+        // console.log(album);
         await p.send(`
-                    add text to=results value="${returnArray[i].title}"
+                    add text to=results value="ALBUM:${returnArray[i].title} ARTIST:${returnArray[i]['artist-credit'][0].artist.name} RELEASE:${returnArray[i]['first-release-date']}"
         `)
     }
     await p.send(`
@@ -69,7 +72,14 @@ async function queryAlbum(p, searchString) {
 
 }
 
+async function queryAlbum(id) {
+
+    const release = await mbApi.getReleaseGroup(id, ['artists']);
+    return release;
+
+}
+
 module.exports = {
-    queryArtist: queryArtist,
-    queryAlbum: queryAlbum
+    queryArtists: queryArtists,
+    queryAlbums: queryAlbums
 }

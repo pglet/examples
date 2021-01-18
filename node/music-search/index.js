@@ -75,14 +75,14 @@ if ('album' in args) {
             let searchString = await p.send(`
                 get search:string value 
             `)
-            await mbApi.queryArtist(p, searchString)          
+            await mbApi.queryArtists(p, searchString)          
         }
 
         if (e._target == 'search:button' && searchType == 'release') {
             let searchString = await p.send(`
                 get search:string value 
             `)
-            await mbApi.queryAlbum(p, searchString)            
+            await mbApi.queryAlbums(p, searchString)            
         }
 
         console.log(e);
