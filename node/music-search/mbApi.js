@@ -31,10 +31,15 @@ async function queryArtists(p, searchString) {
             add text value="${element.name}"
         `)
     });*/
-    
+
     for (i=0; i < returnArray.length; i++) {
         await p.send(`
-                    add text to=results value="${returnArray[i].name}"
+         add detailslist to=results 
+                listItem key="${returnArray[i].name}" value="${returnArray[i].name}" type="${returnArray[i].type}"
+
+        `)
+        await p.send(`
+            add text to=results value="${returnArray[i].name}"
         `)
     }
     await p.send(`
