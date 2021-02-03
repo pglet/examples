@@ -32,15 +32,21 @@ async function queryArtists(p, searchString) {
         `)
     });*/
 
+
+    await p.send(`
+        add detailslist id=resultsList to=results 
+            listColumn key="name" value="name"
+            listColumn key="type" value="type"
+    `)
     for (i=0; i < returnArray.length; i++) {
         await p.send(`
-         add detailslist to=results 
+         add to=resultsList 
                 listItem key="${returnArray[i].name}" value="${returnArray[i].name}" type="${returnArray[i].type}"
 
         `)
-        await p.send(`
-            add text to=results value="${returnArray[i].name}"
-        `)
+        // await p.send(`
+        //     add text to=results value="${returnArray[i].name}"
+        // `)
     }
     await p.send(`
         remove results:searchspinner
