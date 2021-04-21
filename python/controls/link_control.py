@@ -10,22 +10,22 @@ def links():
     Link(url='http://google.com', controls=[
         Icon('Globe'),
         Text(' Link with child controls')
-    ])
-    #link_with_on_click()
+    ]),
+    link_with_on_click()
   ])
 
 def link_with_on_click():
 
   def link_clicked(e):
-    #print(e)
     l.data += 1
     t.value = f"Link clicked {l.data} time(s)"
     stack.update()
 
-    l = Link('Link with on_click event', on_click=link_clicked, title='Click me!', data=0)
-    t = Text()
-    stack = Stack(controls=[l, t])
-    return stack
+    #l = Link('Link with on_click event', on_click=link_clicked, title='Click me!', data=0)
+  l = Link(value='Link with on_click event', on_click=link_clicked, title='Click me!', data=0)
+  t = Text()
+  stack = Stack(controls=[l, t])
+  return stack
 
 def main(page):
 
