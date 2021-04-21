@@ -7,82 +7,37 @@ def textboxes():
     basic_textboxes(),
     
     Text("Multiline textboxes", size="xLarge"),
-    multiline_textboxes()  
+    multiline_textboxes(),
+
+    Text("Underlined and borderless Textboxes", size="xLarge"),
+    underlined_borderless_textboxes(), 
+
+    Text("TextField with prefix and/or suffix", size="xLarge"),
+    suffix_prefix_textboxes()
   ])
-
-'''  
-
-def basic_textboxes():
-  return Stack(gap=20, controls=[
-    Text("Standard", size="Large"),
-    standard_textbox(),
-    
-    Text("Disabled", size="Large"),
-    disabled_textbox(),
-
-    Text("Read-only", size="Large"),
-    readonly_textbox(),
-
-    Text("Required *", size="Large"), #???
-    required_textbox(),
-
-    Text("With error message", size="Large"), #???
-    with_error_message_textbox(),
-
-    Text("With an icon", size="Large"), #???
-    with_an_icon_textbox(),
-    
-    Text("With placeholder", size="Large"), #???
-    with_placeholder_textbox(),
-
-    Text("Password with reveal button", size="Large"), #???
-    password_textbox()
-  ])
-'''  
-
-'''
-
-def multiline_textboxes():
-  return Stack(gap=20, controls=[
-    Text("Standard", size="Large"),
-    standard_multiline_textbox(),
-    
-    Text("Disabled", size="Large"),
-    disabled_multiline_textbox(),
-
-    Text("Read-only", size="Large"),
-    readonly_textbox(),
-
-    Text("Non-resizable", size="Large"), #???
-    nonresizable_textbox(),
-
-    Text("With auto adjusting height", size="Large"), #???
-    with_auto_adjusting_height_textbox(),
-
-    Text("Switches from single to multiline if more than 50 characters are entered", size="Large"), #???
-    switches_to_multiline_textbox()
-  ])
-'''
 
 def basic_textboxes():
   return Stack(controls=[
-    Stack(horizontal=True, controls=[
+    Stack(gap=25, horizontal=True, controls=[
       Textbox(label='Standard'),
       Textbox(label='Disabled', disabled=True)
     ]),
-    Stack(horizontal=True, controls=[
-      Textbox(label='Read-only'), #need to add read-only property  
+    Stack(gap=25, horizontal=True, controls=[
+      Textbox(label='Read-only', read_only=True),  
       Textbox(label="With placeholder", placeholder='Please enter text here')
     ]),
-    Stack(horizontal=True, controls=[
-      Textbox(label='Required *'), #need to add required property. How to dispay * in red?
+    Stack(gap=25, horizontal=True, controls=[
+      Stack(controls=[
+         Textbox(label='Required:', required=True),
+         Textbox(required=True) 
+      ]),
       Textbox(label="With error message", error_message='Error message')
     ]),
-    Stack(horizontal=True, controls=[
-      Textbox(label='With an icon'), #need icon property
+    Stack(gap=25, horizontal=True, controls=[
+      Textbox(label='With an icon', icon='Emoji2'), #need icon property
       Textbox(label='Password with reveal button', password=True)
     ]),
-    Stack(horizontal=True, controls=[
+    Stack(gap=25, horizontal=True, controls=[
       textbox_with_onchange()
     ])
 
@@ -91,7 +46,6 @@ def basic_textboxes():
 def textbox_with_onchange():
     
     def textbox_changed(e):
-      print(e)
       displayed_text.value = entered_text.value
       stack.update()
 
@@ -100,30 +54,33 @@ def textbox_with_onchange():
     stack = Stack(controls=[entered_text, displayed_text])
     return stack
 
-    
-
-
 def multiline_textboxes():
   return Stack(controls=[
-    Stack(horizontal=True, controls=[
-      Stack(controls=[
-          Text("Standard", size="Large"),
-          Textbox(multiline=True)
-      ]),
-      Stack(controls=[
-          Text("Disabled", size="Large"),
-          Textbox(multiline=True, disabled=True)
-      ])
+    Stack(gap=25, horizontal=True, controls=[
+      Textbox(label='standard', multiline=True),
+      Textbox(label='disabled', multiline=True, disabled=True)
+    ]),
+    Stack(gap=25, horizontal=True, controls=[
+      Textbox(label='With auto adjusted height', multiline=True, auto_adjust_height=True) #need auto-adjusted height property
+    ])
+  ])
+
+def underlined_borderless_textboxes():
+  return Stack(controls=[
+    Stack(gap=25, controls=[
+      Textbox(label='Underlined', underlined=True, placeholder='Enter text here'),
+      Textbox(label='Borderless', borderless=True, placeholder='Enter text here')
+    ])
+  ])
+
+def suffix_prefix_textboxes():
+  return Stack(controls=[
+    Stack(gap=25, horizontal=True, controls=[
+      Textbox(label='With prefix', prefix='https://'),
+      Textbox(label='With suffix', suffix='.com')
     ]),
     Stack(horizontal=True, controls=[
-      Stack(controls=[
-          Text("Non-resizable", size="Large"),
-          Textbox()
-      ]),
-      Stack(controls=[
-          Text("With auto adjusted height", size="Large"),
-          Textbox(placeholder='Please enter text here')
-      ])
+      Textbox(label='With prefix and suffix', prefix='https://', suffix='.com')
     ])
   ])
 
@@ -131,8 +88,6 @@ def main(page):
 
     page.title = "Textbox control samples"
     page.update()
-    #page.clean(True)
-
     page.add(textboxes())
 
 pglet.app("textbox-control-samples", target = main)
