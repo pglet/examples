@@ -38,8 +38,25 @@ def regular_buttons():
     Stack(horizontal=True, controls=[
       Button("Primary", primary=True),
       Button("Primary disabled", primary=True, disabled=True)
+    ]),
+    Stack(horizontal=True, controls=[
+      button_with_on_click()
     ])
   ])
+
+def button_with_on_click():
+    
+    def button_clicked(e):
+      #print(e)
+      b.data += 1
+      t.value = f"Button clicked {b.data} time(s)"
+      stack.update()
+
+    b = Button('Button with on_click event', on_click=button_clicked, title='Click me!', data=0)
+    t = Text()
+    stack = Stack(controls=[b, t])
+    return stack
+
 
 def compound_buttons():
   return Stack(horizontal=True, controls=[

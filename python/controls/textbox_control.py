@@ -89,12 +89,16 @@ def basic_textboxes():
   ])
 
 def textbox_with_onchange():
+    
     def textbox_changed(e):
-        print(e)
-    txt=Textbox(label='With onchange event', on_change=textbox_changed)
-    return Stack(controls=[
-        txt,
-        Text(value=txt.value)])
+      print(e)
+      displayed_text.value = entered_text.value
+      stack.update()
+
+    entered_text = Textbox(label='With onchange event', on_change=textbox_changed)
+    displayed_text = Text()
+    stack = Stack(controls=[entered_text, displayed_text])
+    return stack
 
     
 
