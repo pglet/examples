@@ -12,7 +12,7 @@ def messages():
         MessageButton(text='Yes', action='yes'),
         MessageButton(text='No', action='no')
     ]),
-    Message(type='severeWarning', multiline=True, value='Warning defaults to multiline. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus, purus a lobortis tristique, odio augue pharetra metus, ac placerat nunc mi nec dui. Vestibulum aliquam et nunc semper scelerisque. Curabitur vitae orci nec quam condimentum porttitor et sed lacus. Vivamus ac efficitur leo. Cras faucibus mauris libero, ac placerat erat euismod et. Donec pulvinar commodo odio sit amet faucibus. In hac habitasse platea dictumst. Duis eu ante commodo, condimentum nibh pellentesque, laoreet enim. Fusce massa lorem, ultrices eu mi a, fermentum suscipit magna. Integer porta purus pulvinar, hendrerit felis eget, condimentum mauris.', buttons=[
+    Message(type='severeWarning', multiline=True, value='SevereWarning defaults to multiline. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus, purus a lobortis tristique, odio augue pharetra metus, ac placerat nunc mi nec dui. Vestibulum aliquam et nunc semper scelerisque. Curabitur vitae orci nec quam condimentum porttitor et sed lacus. Vivamus ac efficitur leo. Cras faucibus mauris libero, ac placerat erat euismod et. Donec pulvinar commodo odio sit amet faucibus. In hac habitasse platea dictumst. Duis eu ante commodo, condimentum nibh pellentesque, laoreet enim. Fusce massa lorem, ultrices eu mi a, fermentum suscipit magna. Integer porta purus pulvinar, hendrerit felis eget, condimentum mauris.', buttons=[
         MessageButton('OK'),
         MessageButton('Cancel')
     ]),
@@ -34,7 +34,7 @@ def message_with_on_dismiss():
 def message_with_on_dismiss_and_buttons():
 
   def message_dismissed(e):
-    t.value = f"Message dismissed with {e} action"
+    t.value = f"Message dismissed with {e.data} action"
     stack.update()
 
   m = Message(value='Message with on_dismiss event and buttons', dismiss=True, on_dismiss=message_dismissed, buttons=[
