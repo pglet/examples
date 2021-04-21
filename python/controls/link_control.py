@@ -6,12 +6,12 @@ def links():
     Text("Links", size="xLarge"),
     Link(url='http://google.com', value='Visit Google', new_window=True),
     Link(value='Link without URL', size='large'),
-    Link(url='http://google.com', value='Disabled link'),
-    Link(value="Link with child control", controls=[
+    Link(url='http://google.com', value='Disabled link', disabled=True),
+    Link(url='http://google.com', controls=[
         Icon('Globe'),
-        Text('Visit global resourses')
-    ]),
-    link_with_on_click()
+        Text(' Link with child controls')
+    ])
+    #link_with_on_click()
   ])
 
 def link_with_on_click():
