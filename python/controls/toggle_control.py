@@ -36,12 +36,11 @@ def toggle_with_on_change(page):
         # Dark theme
         page.theme_background_color = '#262626'
         page.theme_primary_color = '#3ee66d'
-        page.theme_text_color='#edd2b7'
+        page.theme_text_color = '#edd2b7'
       else:
-        #page.horizontal_align = 'stretch'
         page.theme_background_color = ''
         page.theme_primary_color = ''
-        page.theme_text_color=''
+        page.theme_text_color = ''
       
       page.update()
 
