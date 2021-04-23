@@ -16,8 +16,8 @@ namespace StackExample
                     new Stack
                     {
                         Controls = {
-                            new Text { Value = "Text 1"},
-                            new Text { Value = "Text 2"}
+                            new Text { Value = "Text 1" },
+                            new Text { Value = "Text 2" }
                         }
                     },
                     new Text { Value = "Horizontal stack", Size = TextSize.Large },
@@ -25,8 +25,8 @@ namespace StackExample
                     {
                         Horizontal = true,
                         Controls = {
-                            new Text { Value = "Text 1"},
-                            new Text { Value = "Text 2"}
+                            new Text { Value = "Text 1" },
+                            new Text { Value = "Text 2" }
                         }
                     });
 
