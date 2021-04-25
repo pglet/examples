@@ -3,8 +3,11 @@ from pglet import Stack, Text, Tabs, Tab, Message, Textbox, Button
 
 def tabs(page):
 
+  message = Message(dismiss=True, visible=False)
+
   def tabs_changed(e):
-    page.controls.insert(0, Message(value=f'Tabs changed to "{e.control.value}", count increased', dismiss=True))
+    message.visible = True
+    message.value = f'Tabs changed to "{e.control.value}", count increased'
     e.control.tabs[2].count +=1
     page.update()
 
@@ -42,6 +45,7 @@ def tabs(page):
     ])
        
   return Stack(gap=30, width='50%', controls=[
+      message,
       Stack(controls=[
           Text("Link tabs with Change event", size="xLarge"),
           link_tabs
