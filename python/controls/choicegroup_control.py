@@ -75,6 +75,4 @@ def main(page):
 
     page.add(choicegroups())
 
-pglet.app("choicegroup-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-choicegroup", target = main)

@@ -13,6 +13,4 @@ def main(page):
     page.update()
     page.add(spinbuttons())
 
-pglet.app("spinbuttons-control-samples", target = main)
-
-input("Press Enter to exit...") 
+pglet.app("python-spinbutton", target=main)

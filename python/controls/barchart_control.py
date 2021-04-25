@@ -30,4 +30,4 @@ def main(page):
         chart2
     )
 
-pglet.app("pglet-barchart", target=main)
+pglet.app("python-barchart", target=main)

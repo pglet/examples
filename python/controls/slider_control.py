@@ -40,6 +40,4 @@ def main(page):
     page.update()
     page.add(sliders())
 
-pglet.app("slider-control-samples", target = main)
-
-input("Press Enter to exit...") 
+pglet.app("python-slider", target=main)

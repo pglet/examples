@@ -1,8 +1,3 @@
-import os,sys,inspect
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0,parentdir)
-
 import pglet
 from pglet import Stack, Text, Nav, Message
 from pglet import nav
@@ -74,6 +69,4 @@ def main(page):
     page.update()
     page.add(navs(page))
 
-pglet.app("nav-control-samples", target = main)
-
-input("Press Enter to exit...") 
+pglet.app("python-nav", target = main)

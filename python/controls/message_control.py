@@ -52,6 +52,4 @@ def main(page):
     page.update()
     page.add(messages())
 
-pglet.app("message-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-message", target = main)
