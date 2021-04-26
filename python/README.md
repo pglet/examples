@@ -6,8 +6,8 @@ This directory contains sample Python applications using Pglet:
 * [Hello, world!](hello-world) - Very basic Pglet application.
 * [Greeter](greeter) - A minimal form application.
 * [Icon browser](icon-browser) - A browser for Fluent UI icons.
-* [ToDo] - ToDo application for [Python tutorial](https://pglet.io/docs/tutorials/python).
+* [ToDo](todo) - ToDo application for [Python tutorial](https://pglet.io/docs/tutorials/python).
 
-To run Python examples you need Python 3.7+ with `pglet` module installed:
+Examples require Python 3.7+ with `pglet` module installed:
 
     pip install pglet
