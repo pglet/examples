@@ -2,17 +2,34 @@ import pglet
 from pglet import Stack, Text, SpinButton
 
 def spinbuttons():
-  return Stack(width='50%', controls=[
-        Text("SpinButons", size="xLarge"),
-        SpinButton(label='Default slider')
-    ])
+  return Stack(gap=20, controls=[
+    Stack(controls=[
+        Text("Spinbuttons", size="xLarge"),
+        SpinButton(label='Basic SpinButton:', min=0, max=100, step=1, value=0),
+        SpinButton(disabled=True, label='Disabled SpinButton:', min=0, max=100, step=1, value=0),
+        SpinButton(icon='IncreaseIndentLegacy', label='SpinButton with icon:', min=0, max=100, step=1, value=0),
+        spinbutton_with_on_change()
+        ])
+  ]) 
+
+def spinbutton_with_on_change():
+    
+    def spinbutton_changed(e):
+      s.data += 1
+      t.value = f"Spinbutton changed to {int(s.value)}"
+      stack.update()
+
+    s = SpinButton('SpinButton with Change event', on_change=spinbutton_changed, data=0)
+    t = Text()
+    stack = Stack(controls=[s, t])
+    return stack
 
 def main(page):
 
-    page.title = "Spinbutton control samples"
+    page.title = "SpinButton control samples"
     page.update()
     page.add(spinbuttons())
 
-pglet.app("spinbuttons-control-samples", target = main)
+pglet.app("spinbutton-control-samples", target = main)
 
 input("Press Enter to exit...") 
