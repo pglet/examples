@@ -45,7 +45,7 @@ $page.add(
 
 $tab.clean()
 
-$proc_grid = Grid -ShimmerLines 5 -SelectionMode Single -PreserveSelection -HeaderVisible -Columns @(
+$proc_grid = Grid -ShimmerLines 5 -SelectionMode Single -PreserveSelection -HeaderVisible -KeyFieldName 'PID' -Columns @(
   GridColumn -Resizable -Sortable 'string' -FieldName 'name' -Name 'Process name' -MaxWidth 100
   GridColumn -Resizable -Sortable 'number' -FieldName 'pid' -Name 'PID' -MaxWidth 100
   GridColumn -Resizable -Sortable 'string' -FieldName 'cpu_display' -SortField 'cpu' -Name 'CPU %' -MaxWidth 100
@@ -79,7 +79,6 @@ while($true) {
 
   $proc_grid.items = getTopProcesses 10 | ForEach-Object {
     @{
-      id = $_.PID
       pid = $_.PID
       name = $_.InstanceName
       cpu = $_.CPU
