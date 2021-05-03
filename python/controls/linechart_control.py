@@ -10,7 +10,7 @@ def main(page):
 
     # simple line chart with numbers on X axis
     simple_chart = LineChart(legend=True, tooltips=True, stroke_width=4, y_min=0, y_max=100, y_format='{y}%', 
-            x_type='number', width='30%', height='300px', lines=[
+            x_type='number', width='500', height='300px', lines=[
                 Data(legend='Line 1', points=[
                     Point(x=0, y=0),
                     Point(x=1, y=10),
@@ -27,7 +27,7 @@ def main(page):
 
     # two lines on the same chart
     multi_chart = LineChart(legend=True, tooltips=True, stroke_width=4, y_ticks=5, y_min=0, y_max=100, y_format='{y}%', 
-            x_type='number', width='30%', height='400px', lines=[])
+            x_type='number', width='500', height='400px', lines=[])
 
     line1 = Data(legend='Line 1', color='Orange')
     line2 = Data(legend='Line 2', color='Magenta')
@@ -71,4 +71,4 @@ def main(page):
         page.update()
         time.sleep(1)
 
-pglet.app("pglet-linechart", target=main)
+pglet.app("python-linechart", target=main)

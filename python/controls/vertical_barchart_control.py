@@ -19,7 +19,7 @@ def main(page):
 
     # Vertical chart with numeric x axis
     num_chart = VerticalBarChart(y_ticks=5, y_min=0, y_max=100, y_format='{y}%', 
-            width='100%', height=400, bar_width=20)
+            width='100%', height=400, bar_width=10)
 
     page.add(
         Text("Vertical chart with textual x axis", size='xLarge'),
@@ -41,4 +41,4 @@ def main(page):
         page.update()
         time.sleep(0.05)
 
-pglet.app("pglet-verticallinechart", target=main)
+pglet.app("python-verticalbarchart", target=main)

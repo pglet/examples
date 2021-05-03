@@ -63,6 +63,4 @@ def main(page):
     page.update()
     page.add(tabs(page))
 
-pglet.app("tabs-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-tabs", target=main)

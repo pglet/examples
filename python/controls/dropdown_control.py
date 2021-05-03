@@ -77,6 +77,4 @@ def main(page):
 
     page.add(dropdowns())
 
-pglet.app("dropdown-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-dropdown", target = main)

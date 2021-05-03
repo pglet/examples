@@ -5,10 +5,10 @@ from pglet import Text, Progress
 def main(page):
     page.add(
         Text("Indeterminate Progress", size='xLarge'),
-        Progress("Operation progress", description="Doing something indefinite...", width='30%')
+        Progress("Operation progress", description="Doing something indefinite...", width='50%')
     )
 
-    prog1 = Progress("Copying file1.txt to file2.txt", value=0, width='30%')
+    prog1 = Progress("Copying file1.txt to file2.txt", value=0, width='50%')
     page.add(
         Text("Default Progress", size='xLarge'),
         prog1
@@ -19,7 +19,7 @@ def main(page):
         prog1.update()
         time.sleep(0.005)
 
-    prog2 = Progress("Provisioning your account", value=0, width='30%')
+    prog2 = Progress("Provisioning your account", value=0, width='50%')
     page.add(
         prog2
     )
@@ -54,4 +54,4 @@ def main(page):
     prog2.update()
 
 
-pglet.app("pglet-progress", target=main)
+pglet.app("python-progress", target=main)

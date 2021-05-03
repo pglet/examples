@@ -12,13 +12,13 @@ dialog id=dialogMinimal title='Hello' close
     button text=No
 
 button id=openBasic text='Open basic dialog'
-dialog id=dialogBasic blocking=false largeHeader=false close title='Missing Subject' subText='Do you want to send this message without a subject?'
+dialog id=dialogBasic blocking=false type=largeHeader title='Missing Subject' subText='Do you want to send this message without a subject?'
   footer
     button id=yes primary text=Yes
     button id=no text=No
 
 button id=open text='Open dialog'
-dialog id=dialog blocking=true largeHeader=false close title='Missing Subject' subText='Do you want to send this message without a subject?' width=600
+dialog id=dialog blocking=true type=close title='Missing Subject' subText='Do you want to send this message without a subject?' width=600
   choicegroup id=color
     option key=red
     option key=green

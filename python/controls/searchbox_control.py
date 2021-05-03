@@ -67,6 +67,4 @@ def main(page):
     page.update()
     page.add(searchboxes())
 
-pglet.app("searchbox-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-searchbox", target = main)

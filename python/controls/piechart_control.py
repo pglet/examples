@@ -32,4 +32,4 @@ def main(page):
         chart2        
     )
 
-pglet.app("pglet-piechart", target=main)
+pglet.app("python-piechart", target=main)

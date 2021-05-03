@@ -135,6 +135,4 @@ def main(page):
 
     page.add(buttons())
 
-pglet.app("button-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-button", target = main)

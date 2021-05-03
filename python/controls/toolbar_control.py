@@ -2,7 +2,6 @@ import pglet
 from pglet import Stack, Text, Toolbar, Message
 from pglet import toolbar
 
-
 def toolbars(page):
 
   def item_clicked(e):
@@ -79,6 +78,4 @@ def main(page):
     page.update()
     page.add(toolbars(page))
 
-pglet.app("toolbar-control-samples", target = main)
-
-input("Press Enter to exit...")
+pglet.app("python-toolbar", target=main)

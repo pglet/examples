@@ -39,6 +39,4 @@ def main(page):
     page.update()
     page.add(toggles(page))
 
-pglet.app("toggle-control-samples", target = main)
-
-input("Press Enter to exit...") 
+pglet.app("python-toggle", target=main)
