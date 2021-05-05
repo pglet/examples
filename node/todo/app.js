@@ -19,7 +19,7 @@ class Task {
 class TodoApp {
     constructor(page) {
         this.page = page;
-        this.newTask = new Textbox({placeholder: "What needs doing?"});
+        this.newTask = new Textbox({placeholder: "What needs doing?", onchange: true});
         this.tasksView = new Stack({});
         this.view = new Stack({ width: '70%', childControls: [
             new Stack({ horizontal: true, childControls: [
