@@ -1,5 +1,5 @@
 import pglet
 from pglet import Text
 
-p = pglet.page(web=True)
-p.add(Text(value="Hello, world!"))
+page = pglet.page(web=True)
+page.add(Text("Hello, world!"))

@@ -1,19 +1,15 @@
 Import-Module pglet
 
-Connect-PgletPage "greeter"
+$page = Connect-PgletPage "greeter"
+$page.clean()
 
-Invoke-Pglet "clean"
-$txt_name = Invoke-Pglet "add textbox label='Your name' description='Please provide your full name'"
-$btn_hello = Invoke-Pglet "add button primary text='Say hello'"
-
-while($true) {
-  $e = Wait-PgletEvent
-  if ($e.Target -eq $btn_hello -and $e.Name -eq 'click') {
-    $name = Invoke-Pglet "get $txt_name value"
-    Invoke-Pglet "clean page"
-    Invoke-Pglet "add text value='Hello, $name!'"
-    return
-  }
+$txt_name = TextBox -Label 'Your name' -Description 'Please provide your full name'
+$btn_hello = Button -Primary -Text 'Say hello' -OnClick {
+  $page.controls.clear()
+  $page.controls.add(((Text -Value "Hello, $($txt_name.value)!")))
+  $page.update()
 }
 
-Disconnect-Pglet
+$page.add($txt_name, $btn_hello)
+
+Switch-PgletEvents
