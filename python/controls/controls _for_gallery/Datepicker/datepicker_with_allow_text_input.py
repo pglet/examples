@@ -12,7 +12,8 @@ def on_click(e):
 stack = Stack(controls=[
         Text('DatePicker that allows text input', size='xLarge'),
         Stack(controls=[
-            picker
+            DatePicker(label="Pick or enter a date: ", allow_text_input=True),
+            DatePicker(label="Allow text input with placeholder", placeholder='Select date...', allow_text_input=True)
         ]),
     ])
 
