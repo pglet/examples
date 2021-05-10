@@ -17,5 +17,3 @@ stack = Stack(controls=[
     ])
 
 page.add(stack)
-
-#input("Press Enter to exit...")
