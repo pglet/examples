@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pglet": "^0.2.2"
+    "pglet": "^0.3.1"
   }
 }
