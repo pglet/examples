@@ -92,16 +92,16 @@ class TodoApp {
             if (status == "all") {
                 task.view.visible = true;
             }
-            else if (status == "active" && ((task.displayTask.value == false) || (task.displayTask.value == "false"))) {
+            else if (status == "active" && task.displayTask.value == false) {
                 task.view.visible = true;
             }
-            else if (status == "completed" && ((task.displayTask.value == true) || (task.displayTask.value == "true"))) {
+            else if (status == "completed" && task.displayTask.value == true) {
                 task.view.visible = true;
             }
             else {
                 task.view.visible = false;
             }
-            if ((task.displayTask.value == false) || (task.displayTask.value == "false")) {
+            if (task.displayTask.value == false) {
                 count++;
             } 
         })
