@@ -73,14 +73,13 @@ class TodoApp {
             ]})
         ] });
     }
-    update() {
-        //console.log("Update Runs!!!")
+    async update() {
         let status = this.filter.value;
-        //console.log("status: ", status);
+
         let count = 0;
         this.tasks.forEach(task => {
-            console.log("task.displayTask.value: ", task.displayTask.value);
-            console.log("status: ", status);
+            //console.log("task.displayTask.value: ", task.displayTask.value);
+            //console.log("status: ", status);
             // task.view.visible = (status == 'all' || 
             //         (status == 'active' && task.displayTask.value == false) || 
             //         (status == 'completed' && task.displayTask.value == true))
@@ -103,40 +102,61 @@ class TodoApp {
                 task.view.visible = false;
             }
             if ((task.displayTask.value == false) || (task.displayTask.value == "false")) {
-                console.log("count increment");
                 count++;
             } 
         })
-        console.log("count: ", count);
         this.itemsLeft.value = `${count} active items left`
-        this.view.update()
+        await this.view.update()
     }
+
     addClicked(e) {
         let task = new Task(this, this.newTask.value);
         this.tasks.push(task);
-        //let taskValue = this.newTask.value //await this.page.getValue(this.newTask); //
-        //let checkBox = new Checkbox({value: false, label: taskValue});
         this.tasksView.childControls.push(task.view);
         this.newTask.value = "";
         this.update();
     }
-    deleteTask(task) {
+
+    async deleteTask(task) {
+        //console.log("task in delteTask: ", task)
         let index = this.tasks.indexOf(task);
         if (index > -1) {
             this.tasks.splice(index, 1);
         } 
-        this.tasksView.childControls = this.tasksView.childControls.filter(ctrl => ctrl != task.view);
-        this.update();
+        let index2 = this.tasksView.childControls.indexOf(task.view);
+        if (index2 > -1) {
+            this.tasksView.childControls.splice(index, 1);
+        } 
+
+        await this.update();
     }
+
     tabsChanged(e) {
         this.update();
     }
-    clearClicked(e) {
-        this.tasks.forEach(task => {
-            if (task.displayTask.value == true) {
-                this.deleteTask(task);
+
+    async clearClicked(e) {
+        // //This approach doesn't work because of array iterator specification?
+        // this.tasks.forEach(task => {
+        //     //console.log("taskview from foreach: ", task.view)
+        //     if ((task.displayTask.value == true) || (task.displayTask.value == "true")) {
+        //         this.deleteTask(task);
+        //     }
+        // })
+        // this.tasks.filter(task => {
+        //     let cond = task.displayTask.value == true || task.displayTask.value == "true"
+        //     if (cond) {
+        //         this.deleteTask(task);
+        //     }
+        //     return cond;
+        // })
+        for (let i = this.tasks.length - 1; i >= 0; i--) {
+            if (this.tasks[i].displayTask.value == true || this.tasks[i].displayTask.value == "true"){
+                await this.deleteTask(this.tasks[i]);
             }
-        })
+        }
+        // console.log("this.tasks final: ", this.tasks);
+        // console.log("this.tasksView.childControls final: ", this.tasksView.childControls);
     }
 
 }
