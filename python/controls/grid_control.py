@@ -114,7 +114,7 @@ def main(page):
             last_name,
             age
         ]),
-        Button("Add record", on_click=add_record)
+        Button("Add record", on_click=add_record, width='50')
     )
 
 pglet.app("python-grid", target=main)
