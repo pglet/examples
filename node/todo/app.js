@@ -10,6 +10,7 @@ const Tab = pglet.Tab;
 
 
 class Task {
+
     constructor(app, name) {
         this.app = app;
         this.displayTask = new Checkbox({value: false, label: name, onChange: this.statusChanged.bind(this)});
@@ -34,20 +35,25 @@ class Task {
         this.editView.visible = true;
         this.view.update();
     }
+
     saveClicked(e) {
-        this.displayView.label = this.editName.value;
+        this.displayTask.label = this.editName.value;
         this.displayView.visible = true;
         this.editView.visible = false;
         this.view.update();
     }
+
     deleteClicked(e) {
-        this.app.deleteTask();
+        this.app.deleteTask(this);
     }
+
     statusChanged(e) {
         this.app.update();
     }
+
 }
 class TodoApp {
+
     constructor(page) {
         this.page = page;
         this.tasks = [];
@@ -73,38 +79,21 @@ class TodoApp {
             ]})
         ] });
     }
+
     async update() {
         let status = this.filter.value;
-
         let count = 0;
+
         this.tasks.forEach(task => {
-            //console.log("task.displayTask.value: ", task.displayTask.value);
-            //console.log("status: ", status);
-            // task.view.visible = (status == 'all' || 
-            //         (status == 'active' && task.displayTask.value == false) || 
-            //         (status == 'completed' && task.displayTask.value == true))
-            // if ((status == "all") || (status == "active" && task.displayTask.value == false) || (status == "completed" && task.displayTask.value == true)) {
-            //     task.view.visible = true;
-            // }
-            // else {
-            //     task.view.visible = false;
-            // }
-            if (status == "all") {
-                task.view.visible = true;
-            }
-            else if (status == "active" && task.displayTask.value == false) {
-                task.view.visible = true;
-            }
-            else if (status == "completed" && task.displayTask.value == true) {
-                task.view.visible = true;
-            }
-            else {
-                task.view.visible = false;
-            }
+            task.view.visible = (status == 'all' || 
+                    (status == 'active' && task.displayTask.value == false) || 
+                    (status == 'completed' && task.displayTask.value == true))
+            
             if (task.displayTask.value == false) {
                 count++;
             } 
         })
+
         this.itemsLeft.value = `${count} active items left`
         await this.view.update()
     }
@@ -118,14 +107,14 @@ class TodoApp {
     }
 
     async deleteTask(task) {
-        //console.log("task in delteTask: ", task)
-        let index = this.tasks.indexOf(task);
-        if (index > -1) {
-            this.tasks.splice(index, 1);
+        let i = this.tasks.indexOf(task);
+        if (i > -1) {
+            this.tasks.splice(i, 1);
         } 
-        let index2 = this.tasksView.childControls.indexOf(task.view);
-        if (index2 > -1) {
-            this.tasksView.childControls.splice(index, 1);
+        
+        let j = this.tasksView.childControls.indexOf(task.view);
+        if (j > -1) {
+            this.tasksView.childControls.splice(j, 1);
         } 
 
         await this.update();
@@ -136,27 +125,16 @@ class TodoApp {
     }
 
     async clearClicked(e) {
-        // //This approach doesn't work because of array iterator specification?
-        // this.tasks.forEach(task => {
-        //     //console.log("taskview from foreach: ", task.view)
-        //     if ((task.displayTask.value == true) || (task.displayTask.value == "true")) {
-        //         this.deleteTask(task);
+        // //This approach won't work because of array iterator specification?
+        // this.tasks.forEach(async task => {
+        //     if (task.displayTask.value == true) {
+        //         await this.deleteTask(task);
         //     }
         // })
-        // this.tasks.filter(task => {
-        //     let cond = task.displayTask.value == true || task.displayTask.value == "true"
-        //     if (cond) {
-        //         this.deleteTask(task);
-        //     }
-        //     return cond;
-        // })
-        for (let i = this.tasks.length - 1; i >= 0; i--) {
-            if (this.tasks[i].displayTask.value == true || this.tasks[i].displayTask.value == "true"){
-                await this.deleteTask(this.tasks[i]);
-            }
-        }
-        // console.log("this.tasks final: ", this.tasks);
-        // console.log("this.tasksView.childControls final: ", this.tasksView.childControls);
+
+        for (const task of this.tasks.filter(task => task.displayTask.value == true)) {
+            await this.deleteTask(task);
+        }     
     }
 
 }
@@ -167,7 +145,6 @@ async function main(page) {
     await page.update();
     let app = new TodoApp(page);
     page.add([app.view]);
-
 }
 
 pglet.app("TodoApp", main);
