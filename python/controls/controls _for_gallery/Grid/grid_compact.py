@@ -11,16 +11,16 @@ page = pglet.page()
 
 # Sortable grid
 stack = Stack(controls = [
-        Text("Sortable grid with resizable columns and selectable rows", size='large'),
-        Grid(selection_mode='single', preserve_selection=True, columns=[
-            Column(resizable=True, sortable='string', name="First name", field_name="first_name"),
-            Column(resizable=True, sortable='string', sorted='asc', name="Last name", field_name="last_name"),
-            Column(resizable=True, sortable='number', name="Age", field_name="age")
+        Text("Compact grid with no header and multiple selection", size='large'),
+        Grid(compact=True, header_visible=False, selection_mode='multiple', preserve_selection=True, columns=[
+            Column(max_width=100, field_name="first_name"),
+            Column(max_width=100, field_name="last_name"),
+            Column(max_width=100, field_name="age")
         ], items=[
             Person(first_name='John', last_name='Smith', age=30),
             Person(first_name='Samantha', last_name='Fox', age=43),
             Person(first_name='Alice', last_name='Brown', age=25)
         ])
-    ])   
+])
 
 page.add(stack)
