@@ -1,4 +1,4 @@
-const pglet = require('../../../pglet-node/build/index.js');
+const pglet = require('./pglet-node/build/index.js');
 
 const Text = pglet.Text;
 const Stack = pglet.Stack;
