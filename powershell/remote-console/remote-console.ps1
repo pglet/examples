@@ -1,6 +1,6 @@
 Import-Module pglet
 
-Connect-PgletApp -Name "ps-console/*" -Web -ScriptBlock {
+Connect-PgletApp -Name "ps-console/*" -Permissions $env:PGLET_PERMISSIONS -ScriptBlock {
     $ErrorActionPreference = 'stop'
 
     $page = $PGLET_PAGE
