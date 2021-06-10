@@ -8,7 +8,7 @@ if ($env:PGLET_PAGE) {
 }
 
 if (-not $env:PGLET_PERMISSIONS) {
-    throw "'PGLET_PERMISSIONS' environment variable is not set. Specify the list of GitHub usernames, teams or email addresses being able to access this app, for example 'User1, user2@somemail.com"
+    throw "'PGLET_PERMISSIONS' environment variable is not set. Specify the list of GitHub usernames, teams or email addresses being able to access this app, for example PGLET_PERMISSIONS=`"User1, user2@somemail.com`"."
 }
 
 Connect-PgletApp -Name $pageName -Permissions $env:PGLET_PERMISSIONS -ScriptBlock {
