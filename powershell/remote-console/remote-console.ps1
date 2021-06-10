@@ -1,8 +1,14 @@
 Import-Module pglet
 
-$pageName = "ps-console/$(hostname)"
+$ErrorActionPreference = "stop"
+
+$pageName = "ps-shell-$(hostname)"
 if ($env:PGLET_PAGE) {
     $pageName = $env:PGLET_PAGE
+}
+
+if (-not $env:PGLET_PERMISSIONS) {
+    throw "'PGLET_PERMISSIONS' environment variable is not set. Specify the list of GitHub usernames, teams or email addresses being able to access this app, for example 'User1, user2@somemail.com"
 }
 
 Connect-PgletApp -Name $pageName -Permissions $env:PGLET_PERMISSIONS -ScriptBlock {
