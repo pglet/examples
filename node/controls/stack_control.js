@@ -1,4 +1,5 @@
-const pglet = require('../../../pglet-node/dist/index.js');
+//const pglet = require('../../../pglet-node/dist/index.js');
+const pglet = require('@britzkopf/pglet');
 
 const Text = pglet.Text;
 const Stack = pglet.Stack;
@@ -39,14 +40,14 @@ async function main(p) {
     console.log("spacingStack: ", spacingStack);
     function gapSliderChange(e) {
         spacingStack.gap = parseInt(e.control.value);
-        p.update();
+        spacingStack.update();
 
     }
     let gapSlider = new Slider({label: "Gap between items", min: 0, max: 50, step: 1, value: 0, showValue: true, onChange: gapSliderChange});
     
     function paddingSliderChange(e) {
         spacingStack.padding = e.control.value;
-        p.update();
+        spacingStack.update();
     }
     let paddingSlider = new Slider({label: "Stack padding", min: 0, max: 50, step: 1, value: 0, showValue: true, onChange: paddingSliderChange})
 
@@ -59,7 +60,7 @@ async function main(p) {
         let width = parseInt(e.control.value);
         console.log("width from slider event: ", width);
         wrapStack.width = `${width}%`;
-        p.update();
+        wrapStack.update();
     }
     let wrapSlider = new Slider({label: "Change the stack width to see how child items wrap onto multiple rows", 
         min: 0, max: 100, step: 10, value: 100, showValue: true, valueFormat: "{value}%", onChange: wrapSliderChange
@@ -101,7 +102,7 @@ async function main(p) {
     function stackOnSubmit(e) {
         let stack = e.control;
         stack.childControls.unshift(new Message({value: "Form has been submitted!", type: "success", dismiss: true}))
-        p.update();
+        stack.update();
     }
     let form1 = new Stack({padding: 10, width: '50%', border: '2px solid #eee', borderRadius: 5, childControls: [
         new Text({value: "Pressing ENTER inside the stack will fire 'submit' event."}),
@@ -113,4 +114,4 @@ async function main(p) {
 
 }
 
-pglet.app("node-stack", main);
+pglet.app("node-stack",{local: true}, main);

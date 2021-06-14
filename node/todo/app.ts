@@ -1,16 +1,23 @@
 //const pglet = require('../../../pglet-node/build/index.js');
 const pglet = require('@britzkopf/pglet');
+import {Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet'
 
-const Text = pglet.Text;
-const Stack = pglet.Stack;
-const Textbox = pglet.Textbox;
-const Button = pglet.Button;
-const Checkbox = pglet.Checkbox;
-const Tabs = pglet.Tabs;
-const Tab = pglet.Tab;
-
+// const Text = pglet.Text;
+// const Stack = pglet.Stack;
+// const Textbox = pglet.Textbox;
+// const Button = pglet.Button;
+// const Checkbox = pglet.Checkbox;
+// const Tabs = pglet.Tabs;
+// const Tab = pglet.Tab;
+// const Page = pglet.Page;
 
 class Task {
+    app?: TodoApp;
+    displayTask?: Checkbox;
+    editName?: Textbox;
+    displayView?: Stack;
+    editView?: Stack;
+    view?: Stack;
 
     constructor(app, name) {
         this.app = app;
@@ -54,6 +61,13 @@ class Task {
 
 }
 class TodoApp {
+    page?: Control;
+    tasks?: Task[];
+    newTask?: Textbox;
+    tasksView?: Stack;
+    filter?: Tabs;
+    itemsLeft?: Text;
+    view?: Stack;
 
     constructor(page) {
         this.page = page;
@@ -70,7 +84,7 @@ class TodoApp {
                 this.newTask,
                 new Button({primary: true, text: 'Add', onClick: this.addClicked.bind(this)})
             ] }),
-            new Stack({gap: 25, childControls: [
+            new Stack({gap: '25', childControls: [
                 this.filter,
                 this.tasksView,
                 new Stack({horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
@@ -149,3 +163,5 @@ async function main(page) {
 }
 
 pglet.app("TodoApp", main);
+
+export {};

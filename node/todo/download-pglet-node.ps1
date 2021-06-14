@@ -38,7 +38,7 @@ $requestHeaders = New-Object "System.Collections.Generic.Dictionary[[String],[St
 $requestHeaders.Add("Authorization", "token ${token}")
 $requestHeaders.Add("Accept", "application/vnd.github.v3+json")
 $mostRecentCommit = (Invoke-RestMethod -uri https://api.github.com/repos/OwenMcDonnell/pglet-node/branches/v1 -Headers $headers).commit.sha
-Echo "the most recent commit is: $mostRecentCommit"
+Write-Output "the most recent commit is: $mostRecentCommit"
 $filelist = Invoke-RestMethod -uri "https://api.github.com/repos/OwenMcDonnell/pglet-node/git/trees/${mostRecentCommit}" -Headers $headers
 #Echo "returned file list: $filelist"
 Get-Files $filelist.tree "${destination}/pglet-node"
@@ -48,9 +48,9 @@ $node_modules = "$PSScriptRoot\pglet-node\node_modules"
 if (-Not (Test-path $node_modules)) {
 	npm install
 }
-$build_folder = "$PSScriptRoot\pglet-node\build"
+# $build_folder = "$PSScriptRoot\pglet-node\dist"
 # if (-Not (Test-path $build_folder)) {
-	# tsc
+# 	tsc
 # }
 tsc
 

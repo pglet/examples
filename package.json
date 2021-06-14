@@ -1,0 +1,23 @@
+{
+  "name": "pglet",
+  "description": "Pglet (\"piglet\") is a rich user interface (UI) framework for scripts and programs written in any language and a service for securely sharing your application UI.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OwenMcDonnell/examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@britzkopf/pglet": "^0.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/OwenMcDonnell/examples/issues"
+  },
+  "homepage": "https://github.com/OwenMcDonnell/examples#readme"
+}

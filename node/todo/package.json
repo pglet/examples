@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pglet": "^0.3.1"
+    "@britzkopf/pglet": "^0.0.3"
   }
 }
