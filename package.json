@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@britzkopf/pglet": "^0.0.4"
+    "@britzkopf/pglet": "0.0.5"
   },
   "bugs": {
     "url": "https://github.com/OwenMcDonnell/examples/issues"

@@ -1,6 +1,6 @@
 //const pglet = require('../../../pglet-node/build/index.js');
 const pglet = require('@britzkopf/pglet');
-import {Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet'
+import {Page, Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet'
 
 // const Text = pglet.Text;
 // const Stack = pglet.Stack;
@@ -19,7 +19,7 @@ class Task {
     editView?: Stack;
     view?: Stack;
 
-    constructor(app, name) {
+    constructor(app: TodoApp, name: string) {
         this.app = app;
         this.displayTask = new Checkbox({value: false, label: name, onChange: this.statusChanged.bind(this)});
         this.editName = new Textbox({width: "100%"});
@@ -69,7 +69,7 @@ class TodoApp {
     itemsLeft?: Text;
     view?: Stack;
 
-    constructor(page) {
+    constructor(page: Page) {
         this.page = page;
         this.tasks = [];
         this.newTask = new Textbox({placeholder: "What needs doing?", width: "100%"});
@@ -154,7 +154,7 @@ class TodoApp {
 
 }
 
-async function main(page) {
+async function main(page: Page) {
     page.title = "ToDo app";
     page.horizontalAlign = 'center';
     await page.update();
@@ -164,4 +164,5 @@ async function main(page) {
 
 pglet.app("TodoApp", main);
 
+//required to be recognized as a module and thus not conflict with global scoped variables in dom.d.ts
 export {};
