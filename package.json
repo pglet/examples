@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "pglet": "^0.4.3"
+  }
+}
