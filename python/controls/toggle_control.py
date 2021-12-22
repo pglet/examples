@@ -20,13 +20,9 @@ def toggle_with_on_change(page):
     def toggle_changed(e):
       if t.value:
         # Dark theme
-        page.theme_background_color = '#262626'
-        page.theme_primary_color = '#3ee66d'
-        page.theme_text_color = '#edd2b7'
+        page.theme = 'dark'
       else:
-        page.theme_background_color = ''
-        page.theme_primary_color = ''
-        page.theme_text_color = ''
+        page.theme = 'light'
       
       page.update()
 

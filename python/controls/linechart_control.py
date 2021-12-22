@@ -27,7 +27,7 @@ def main(page):
 
     # two lines on the same chart
     multi_chart = LineChart(legend=True, tooltips=True, stroke_width=4, y_ticks=5, y_min=0, y_max=100, y_format='{y}%', 
-            x_type='number', width='500', height='400px', lines=[])
+            x_type='number', width='500', height='300px', lines=[])
 
     line1 = Data(legend='Line 1', color='Orange')
     line2 = Data(legend='Line 2', color='Magenta')
@@ -39,7 +39,7 @@ def main(page):
 
     # negative values with time on X axis
     temp_chart = LineChart(legend=True, tooltips=True, y_ticks=4, y_min=-20, y_max=20, y_format='{y} °C', 
-            x_type='date', width='500px', height='400px', lines=[
+            x_type='date', width='500px', height='300px', lines=[
                 Data(color='green', legend='t, °C')
             ])
     start_date = datetime.datetime(2021, 4, 1, 10, 5)

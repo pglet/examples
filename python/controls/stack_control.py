@@ -12,7 +12,7 @@ def main(page):
     def items(count):
         items = []
         for i in range(1, count + 1):
-            items.append(Text(value=i, align='center', vertical_align='center', width=30, height=30, bgcolor='CyanBlue10', color='white', padding=5))
+            items.append(Text(value=i, align='center', vertical_align='center', width=30, height=30, bgcolor='BlueMagenta10', color='white', padding=5))
         return items
 
     def create_horizontal_stack(horiz_align):
