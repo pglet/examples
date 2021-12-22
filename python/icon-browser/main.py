@@ -56,5 +56,3 @@ def load_icon_names():
     return icon_names
 
 pglet.app("index", target=main)
-
-input("Press Enter to exit...")

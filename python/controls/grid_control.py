@@ -117,4 +117,4 @@ def main(page):
         Button("Add record", on_click=add_record)
     )
 
-pglet.app("python-grid", target=main)
+pglet.app("python-grid", target=main, web=False)
