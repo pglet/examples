@@ -12,7 +12,6 @@ $main = {
   }
 
   $page.add($txt_name, $btn_hello)
-
 }
 
 Connect-PgletApp -Name 'greeter-app' -ScriptBlock $main

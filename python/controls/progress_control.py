@@ -3,6 +3,7 @@ import pglet
 from pglet import Text, Progress
 
 page = pglet.page("python-progress")
+page.clean()
 
 page.add(
     Text("Indeterminate Progress", size='xLarge'),

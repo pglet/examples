@@ -14,6 +14,7 @@ def main(page):
         page.update()
 
     def page_signout(e):
+        print("Sign out event")
         logged_user.value = "Not logged in"
         page.update()
 
@@ -22,7 +23,7 @@ def main(page):
 
     page.add(
         logged_user,
-        Button('Signout', on_click=signout_clicked)
+        Button('Sign out', on_click=signout_clicked)
     )
 
-pglet.app("pglet-signin-test", target=main, web=True, permissions="*")
+pglet.app("pglet-signin-test", target=main, web=False, permissions="*")
