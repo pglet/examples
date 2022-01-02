@@ -1,7 +1,3 @@
-import datetime
-import random
-import time
-
 import pglet
 from pglet import Text, BarChart
 from pglet.barchart import Point
