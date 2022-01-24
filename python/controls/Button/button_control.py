@@ -26,7 +26,10 @@ def buttons():
     context_menu_buttons(),
 
     Text("Split buttons", size="xLarge"),
-    split_buttons()    
+    split_buttons(),
+
+    Text("Action buttons", size="xLarge"),
+    action_buttons()      
   ])
 
 def regular_buttons():
@@ -126,6 +129,14 @@ def split_buttons():
         button.MenuItem('Email message', icon='Mail'),
         button.MenuItem('Calendar event', icon='Calendar')
       ])
+    ])
+
+def action_buttons():
+  return Stack(horizontal=True, controls=[
+      Button(action=True, text='<'),
+      Button(action=True, text='<<'),
+      Button(action=True, text='>'),
+      Button(action=True, text='>>'),
     ])
 
 def main(page):
