@@ -5,4 +5,6 @@ with pglet.page("myapp") as page:
   page.clean()
   now = datetime.now()
   page.add(
-      DatePicker(width=150, label="Allow text input", allow_text_input=True))
+    DatePicker(width=150, label="Allow text input", allow_text_input=True),
+    DatePicker(label="Allow text input with placeholder", placeholder='Select date...', allow_text_input=True, width='25%'),
+    DatePicker(value=now, label="Required", required=True, allow_text_input=True))
