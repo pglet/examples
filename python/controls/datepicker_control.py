@@ -2,6 +2,7 @@ from datetime import datetime
 import pglet
 from pglet import DatePicker, Stack, Button
 
+
 def main(page):
     def on_change(e):
         print(e.control.value)
@@ -15,8 +16,14 @@ def main(page):
         DatePicker(label="End date"),
         picker,
         Button("Check value", on_click=lambda e: print("Selected date:", picker.value)),
-        DatePicker(label="Allow text input with placeholder", placeholder='Select date...', allow_text_input=True, width='50%'),
-        DatePicker(value=now, label="Required", required=True, allow_text_input=True)
+        DatePicker(
+            label="Allow text input with placeholder",
+            placeholder="Select date...",
+            allow_text_input=True,
+            width="50%",
+        ),
+        DatePicker(value=now, label="Required", required=True, allow_text_input=True),
     )
+
 
 pglet.app("python-datepicker", target=main)
