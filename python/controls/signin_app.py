@@ -1,12 +1,13 @@
 import pglet
 from pglet import Text, Textbox, Button, Checkbox
 
+
 def main(page):
-    
+
     logged_user = Text(f"Welcome, {page.user_login}!")
 
     def signout_clicked(e):
-        page.signout()    
+        page.signout()
 
     def page_signin(e):
         print("Sign in event")
@@ -21,9 +22,7 @@ def main(page):
     page.on_signin = page_signin
     page.on_signout = page_signout
 
-    page.add(
-        logged_user,
-        Button('Sign out', on_click=signout_clicked)
-    )
+    page.add(logged_user, Button("Sign out", on_click=signout_clicked))
+
 
 pglet.app("pglet-signin-test", target=main, web=False, permissions="*")
