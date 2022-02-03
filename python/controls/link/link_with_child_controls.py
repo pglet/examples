@@ -1,8 +1,7 @@
 import pglet
-from pglet import Link
-with pglet.page("myapp") as page:
-    page.clean()
-    from pglet import Text, Icon, Button
+from pglet import Link, Text, Icon, Button
+with pglet.page("link-with-child-controls") as page:
+
     page.add(
         Link(url='http://google.com', controls=[
         Icon('Globe'),
