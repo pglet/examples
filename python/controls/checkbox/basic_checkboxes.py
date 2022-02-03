@@ -1,8 +1,6 @@
 import pglet
-from pglet import Checkbox
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Button, Text
+from pglet import Checkbox, Button, Text
+with pglet.page("basic-checkboxes") as page:
   def button_clicked(e):
         t.value = f"Checkboxes values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}."
         page.update()

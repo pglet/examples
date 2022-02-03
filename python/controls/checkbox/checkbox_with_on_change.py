@@ -1,16 +1,13 @@
 import pglet
-from pglet import Checkbox
+from pglet import Checkbox, Text
 
-with pglet.page("myapp") as page:
-    page.clean()
-    from pglet import Text
-    def checkbox_changed(e):
-        t.value = f"Checkbox value changed to {c.value}" 
-        t.update()
+with pglet.page("checkbox-with-change-event") as page:
+  def checkbox_changed(e):
+    t.value = f"Checkbox value changed to {c.value}" 
+    t.update()
 
-    c = Checkbox('Checkbox with on_change event', on_change=checkbox_changed)
-    t = Text()
+  c = Checkbox("Checkbox with 'change' event", on_change=checkbox_changed)
+  t = Text()
 
-    page.add(c, t)
-
-    input()
+  page.add(c, t)
+  input()
