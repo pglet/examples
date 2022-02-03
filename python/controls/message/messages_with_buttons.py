@@ -1,8 +1,7 @@
 import pglet
-from pglet import Message
+from pglet import Message, MessageButton
 with pglet.page("myapp") as page:
-    page.clean()
-    from pglet import MessageButton
+
     page.add(
       Message(type='warning', dismiss=True, value='Warning message with buttons', buttons=[
         MessageButton(text='Yes', action='yes'),
