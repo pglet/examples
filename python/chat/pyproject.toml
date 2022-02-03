@@ -1,0 +1,22 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Pglet", email = "hello@pglet.io"},
+]
+dependencies = [
+    "pglet>=0.5.12",
+]
+requires-python = ">=3.8"
+license = {text = "MIT"}
+
+[project.urls]
+homepage = ""
+
+[tool]
+[tool.pdm]
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
