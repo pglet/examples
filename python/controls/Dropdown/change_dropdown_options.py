@@ -18,19 +18,15 @@ with pglet.page("myapp") as page:
     page.update()
 
   def delete_clicked(e):
-    option = find_option(option_textbox.value)
+    option = find_option(d.value)
     if option !=None:
       d.options.remove(option)    
-    else:
-      option_textbox.error_message = 'Option not found.'
-    
-    option_textbox.value = ''
-    page.update()
+      page.update()
 
   d = Dropdown()
   option_textbox = Textbox(placeholder='Enter item name')
   add = Button("Add", on_click=add_clicked)
-  delete = Button("Delete", on_click=delete_clicked)
+  delete = Button("Delete selected", on_click=delete_clicked)
   stack = Stack(controls = [d, Stack(horizontal=True, controls=[option_textbox, add, delete])])
 
   page.add(stack)

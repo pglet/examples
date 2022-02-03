@@ -14,23 +14,19 @@ with pglet.page("myapp") as page:
   def add_clicked(e):
     cg.options.append(choicegroup.Option(option_textbox.value))
     option_textbox.value = ''
-    stack.update()
-
-  def delete_clicked(e):
-    option = find_option(option_textbox.value)
-    if option !=None:
-      cg.options.remove(option)    
-    else:
-      option_textbox.error_message = 'Option not found.'
-    
-    option_textbox.value = ''
     page.update()
 
+  def delete_clicked(e):
+    option = find_option(cg.value)
+    if option !=None:
+      cg.options.remove(option)   
+      page.update()
+
   cg = ChoiceGroup()
-  option_textbox = Textbox(placeholder='Enter item name')
+  option_textbox = Textbox(placeholder='Enter new item name')
   
   add = Button("Add", on_click=add_clicked)
-  delete = Button("Delete", on_click=delete_clicked)
+  delete = Button("Delete selected", on_click=delete_clicked)
   stack = Stack(controls = [cg, Stack(horizontal=True, controls=[option_textbox, add, delete])])
 
   page.add(stack)
