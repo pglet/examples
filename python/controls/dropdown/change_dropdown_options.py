@@ -1,9 +1,6 @@
 import pglet
-from pglet import Dropdown
-from pglet import dropdown
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Textbox, Button, Stack
+from pglet import Dropdown, dropdown, Textbox, Button, Stack
+with pglet.page("change-dropdown-options") as page:
 
   def find_option(option_name):
     for option in d.options:

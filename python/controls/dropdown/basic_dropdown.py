@@ -1,9 +1,7 @@
 import pglet
-from pglet import Dropdown
-from pglet import dropdown
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Button, Text
+from pglet import Dropdown, dropdown, Button, Text
+with pglet.page("basic-dropdown") as page:
+  
   def button_clicked(e):
     t.value = f"Dropdown value is:  {dd.value}"
     page.update()

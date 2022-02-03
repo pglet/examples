@@ -1,9 +1,6 @@
 import pglet
-from pglet import Dropdown
-from pglet import dropdown
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Text
+from pglet import Dropdown, dropdown, Text
+with pglet.page("dropdown-with-change-event") as page:
 
   def dropdown_changed(e):
         t.value = f"Dropdown changed to {d.value}" 
