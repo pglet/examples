@@ -1,9 +1,7 @@
 import pglet
-from pglet import ChoiceGroup
-from pglet import choicegroup
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Text
+from pglet import ChoiceGroup, choicegroup, Text
+with pglet.page("choicegroup-with-change-event") as page:
+  
   def choicegroup_changed(e):
         t.value = f"ChoiceGroup value changed to {cg.value}" 
         t.update()

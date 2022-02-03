@@ -1,13 +1,10 @@
 import pglet
-from pglet import ChoiceGroup
-from pglet import choicegroup
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Textbox, Button, Stack
+from pglet import ChoiceGroup, choicegroup, Textbox, Button, Stack
+with pglet.page("change-choicegroup-options") as page:
 
   def find_option(option_name):
     for option in cg.options:
-        if option_name == option.key:
+        if option.key == option_name:
           return option          
     return None
 

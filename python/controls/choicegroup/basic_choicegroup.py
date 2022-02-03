@@ -1,9 +1,6 @@
 import pglet
-from pglet import ChoiceGroup
-from pglet import choicegroup
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Button, Text
+from pglet import ChoiceGroup, choicegroup, Button, Text
+with pglet.page("basic-choicegroup") as page:
   def button_clicked(e):
     t.value = f"ChoiceGroup value is:  {cg.value}"
     page.update()
