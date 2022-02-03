@@ -1,7 +1,6 @@
 import pglet
 from pglet import Button, Stack
-with pglet.page("myapp") as page:
-    page.clean()
+with pglet.page("toolbar-buttons") as page:
     page.add(Stack(horizontal=True, controls=[
       Button(text="New item", toolbar=True, icon='Add'),
       Button(text="Send", toolbar=True, icon='Mail'),
