@@ -1,9 +1,7 @@
 from datetime import datetime
 import pglet
-from pglet import DatePicker
-with pglet.page("myapp") as page:
-  page.clean()
-  from pglet import Button, Text
+from pglet import DatePicker, Button, Text
+with pglet.page("basic-datepicker") as page:
   def button_clicked(e):
     t.value = f"DatePickers values are:  {dp1.value}, {dp2.value}."
     page.update()

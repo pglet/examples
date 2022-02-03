@@ -1,8 +1,7 @@
 from datetime import datetime
 import pglet
 from pglet import DatePicker
-with pglet.page("myapp") as page:
-  page.clean()
+with pglet.page("datepicker-allow-text-input") as page:
   now = datetime.now()
   page.add(
     DatePicker(width=150, label="Allow text input", allow_text_input=True),
