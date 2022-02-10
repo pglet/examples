@@ -1,16 +1,17 @@
 import pglet
-from pglet import Textbox, Button
+from pglet import Text, Textbox
+
 with pglet.page("textbox-with-change-event") as page:
-  def textbox_changed(e):
-    if tb.value =='':
-        tb.error_message = 'Field is required'
-    else:
-        tb.error_message = ''
 
-    page.update()
+    def textbox_changed(e):
+        t.value = e.control.value
+        page.update()
 
-  tb = Textbox(label='Required:', required=True, on_change=textbox_changed, error_message='Field is required')
+    t = Text()
+    tb = Textbox(
+        label="Textbox with 'change' event:",
+        on_change=textbox_changed,
+    )
 
-  page.add(tb)
-  input()
-  
+    page.add(tb, t)
+    input()
