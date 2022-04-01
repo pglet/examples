@@ -1,23 +1,24 @@
 //const pglet = require('../../../pglet-node/build/index.js');
-const pglet = require('@britzkopf/pglet');
-import {Page, Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet'
+import * as pglet from '../../../pglet-node/src/index'
+// const pglet = require('@britzkopf/pglet');
+// import {Page, Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet'
 
-// const Text = pglet.Text;
-// const Stack = pglet.Stack;
-// const Textbox = pglet.Textbox;
-// const Button = pglet.Button;
-// const Checkbox = pglet.Checkbox;
-// const Tabs = pglet.Tabs;
-// const Tab = pglet.Tab;
-// const Page = pglet.Page;
+const Text = pglet.Text;
+const Stack = pglet.Stack;
+const Textbox = pglet.Textbox;
+const Button = pglet.Button;
+const Checkbox = pglet.Checkbox;
+const Tabs = pglet.Tabs;
+const Tab = pglet.Tab;
+const Page = pglet.Page;
 
 class Task {
     app?: TodoApp;
-    displayTask?: Checkbox;
-    editName?: Textbox;
-    displayView?: Stack;
-    editView?: Stack;
-    view?: Stack;
+    displayTask?: pglet.Checkbox;
+    editName?: pglet.Textbox;
+    displayView?: pglet.Stack;
+    editView?: pglet.Stack;
+    view?: pglet.Stack;
 
     constructor(app: TodoApp, name: string) {
         this.app = app;
@@ -61,15 +62,15 @@ class Task {
 
 }
 class TodoApp {
-    page?: Control;
+    page?: pglet.Control;
     tasks?: Task[];
-    newTask?: Textbox;
-    tasksView?: Stack;
-    filter?: Tabs;
-    itemsLeft?: Text;
-    view?: Stack;
+    newTask?: pglet.Textbox;
+    tasksView?: pglet.Stack;
+    filter?: pglet.Tabs;
+    itemsLeft?: pglet.Text;
+    view?: pglet.Stack;
 
-    constructor(page: Page) {
+    constructor(page: pglet.Page) {
         this.page = page;
         this.tasks = [];
         this.newTask = new Textbox({placeholder: "What needs doing?", width: "100%"});
@@ -77,7 +78,7 @@ class TodoApp {
         this.filter = new Tabs({value: "all", onChange: this.tabsChanged.bind(this), tabs: [
             new Tab({text: "all"}), new Tab({text: "active"}), new Tab({text: "completed"})
         ]})
-        this.itemsLeft= new Text({value: "0 items left"})
+        this.itemsLeft = new Text({value: "0 items left"})
         this.view = new Stack({ width: '70%', childControls: [
             new Text({value: "Todos", size: "large", align: "center"}),
             new Stack({ horizontal: true, childControls: [
@@ -154,7 +155,7 @@ class TodoApp {
 
 }
 
-async function main(page: Page) {
+async function main(page: pglet.Page) {
     page.title = "ToDo app";
     page.horizontalAlign = 'center';
     await page.update();
@@ -162,7 +163,7 @@ async function main(page: Page) {
     page.add([app.view]);
 }
 
-pglet.app("TodoApp", main);
+pglet.serveApp(main, {pageName: "ToDo app"});
 
 //required to be recognized as a module and thus not conflict with global scoped variables in dom.d.ts
 export {};
