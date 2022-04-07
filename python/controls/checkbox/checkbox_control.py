@@ -1,5 +1,5 @@
 import pglet
-from pglet import Stack, Text, Checkbox
+from pglet import Checkbox, Stack, Text
 
 
 def checkboxes():

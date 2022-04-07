@@ -1,6 +1,5 @@
 import pglet
-from pglet import Stack, Text, Button
-from pglet import button
+from pglet import Button, Stack, Text, button
 
 
 def buttons():
@@ -211,6 +210,18 @@ def split_buttons():
                     button.MenuItem("Calendar event", icon="Calendar"),
                 ],
             ),
+        ],
+    )
+
+
+def action_buttons():
+    return Stack(
+        horizontal=True,
+        controls=[
+            Button(action=True, text="<"),
+            Button(action=True, text="<<"),
+            Button(action=True, text=">"),
+            Button(action=True, text=">>"),
         ],
     )
 

@@ -1,6 +1,6 @@
 import pglet
-from pglet import Stack, Text, Nav, Message
-from pglet import nav
+from pglet import Message, Nav, Stack, Text, nav
+
 
 
 def navs(page):

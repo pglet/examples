@@ -1,5 +1,5 @@
 import pglet
-from pglet import Text, Spinner
+from pglet import Spinner, Text
 
 
 def main(page):

@@ -1,5 +1,5 @@
 import pglet
-from pglet import Stack, Text, Message, Button, MessageButton
+from pglet import Button, Message, MessageButton, Stack, Text
 
 
 def messages():
@@ -65,7 +65,7 @@ def message_with_on_dismiss_and_buttons():
         stack.update()
 
     m = Message(
-        value="Message with on_dismiss event and buttons",
+        value="Message with dismiss event and buttons",
         dismiss=True,
         on_dismiss=message_dismissed,
         buttons=[MessageButton("OK"), MessageButton("Cancel")],

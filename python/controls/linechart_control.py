@@ -3,7 +3,7 @@ import random
 import time
 
 import pglet
-from pglet import Text, LineChart
+from pglet import LineChart, Text
 from pglet.linechart import Data, Point
 
 

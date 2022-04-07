@@ -33,6 +33,10 @@ def main(page):
             alt="Example with no image fit value and height or width is specified.",
         ),
     )
+    page.add(
+        Image(src='https://via.placeholder.com/350x150', title='sample image', fit='cover')
+    )
+        
 
 
 pglet.app("python-image", target=main)
