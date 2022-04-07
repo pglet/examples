@@ -2,6 +2,7 @@ import pglet
 from pglet import Message, Nav, Stack, Text, nav
 
 
+
 def navs(page):
 
     nav1 = None
