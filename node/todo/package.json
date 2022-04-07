@@ -2,14 +2,17 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@britzkopf/pglet": "^0.0.3"
+    "@britzkopf/pglet": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23"
   }
 }
