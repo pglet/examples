@@ -129,13 +129,6 @@ class TodoApp {
     }
 
     async clearClicked(e) {
-        // //This approach won't work because of array iterator specification?
-        // this.tasks.forEach(async task => {
-        //     if (task.displayTask.value == true) {
-        //         await this.deleteTask(task);
-        //     }
-        // })
-
         for (const task of this.tasks.filter(task => task.displayTask.value == true)) {
             await this.deleteTask(task);
         }     
