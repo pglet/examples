@@ -1,17 +1,14 @@
 {
-  "name": "node-demo-app",
+  "name": "todo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.0",
-    "minimist": "^1.2.5",
-    "musicbrainz-api": "^0.5.2",
-    "pglet": "^0.1.6"
+    "@britzkopf/pglet": "^0.1.1"
   }
 }
