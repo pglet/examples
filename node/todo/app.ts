@@ -1,13 +1,4 @@
-import { serveApp, Page, Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet'
-
-// const Text = pglet.Text;
-// const Stack = pglet.Stack;
-// const Textbox = pglet.Textbox;
-// const Button = pglet.Button;
-// const Checkbox = pglet.Checkbox;
-// const Tabs = pglet.Tabs;
-// const Tab = pglet.Tab;
-// const Page = pglet.Page;
+import { serveApp, Page, Control, Text, Stack, Textbox, Button, Tab, Tabs, Checkbox } from '@britzkopf/pglet';
 
 class Task {
     app?: TodoApp;
@@ -161,6 +152,3 @@ async function main(page: Page) {
 }
 
 serveApp(main, {pageName: "ToDo App", web: false, noWindow: false});
-
-//required to be recognized as a module and thus not conflict with global scoped variables in dom.d.ts
-export {};
