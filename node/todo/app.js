@@ -1,23 +1,32 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const pglet_1 = require("@britzkopf/pglet");
+
+const pglet = require("@britzkopf/pglet");
+const Text = pglet.Text;
+const Stack = pglet.Stack;
+const Textbox = pglet.Textbox;
+const Button = pglet.Button;
+const Checkbox = pglet.Checkbox;
+const Tabs = pglet.Tabs;
+const Tab = pglet.Tab;
+const Page = pglet.Page;
+
 class Task {
     constructor(app, name) {
         this.app = app;
-        this.displayTask = new pglet_1.Checkbox({ value: false, label: name, onChange: this.statusChanged.bind(this) });
-        this.editName = new pglet_1.Textbox({ width: "100%" });
-        this.displayView = new pglet_1.Stack({ horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
+        this.displayTask = new Checkbox({ value: false, label: name, onChange: this.statusChanged.bind(this) });
+        this.editName = new Textbox({ width: "100%" });
+        this.displayView = new Stack({ horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
                 this.displayTask,
-                new pglet_1.Stack({ horizontal: true, gap: "0", childControls: [
-                        new pglet_1.Button({ icon: "Edit", title: "Edit Todo", onClick: this.editClicked.bind(this) }),
-                        new pglet_1.Button({ icon: "Delete", title: "Delete Todo", onClick: this.deleteClicked.bind(this) })
+                new Stack({ horizontal: true, gap: "0", childControls: [
+                        new Button({ icon: "Edit", title: "Edit Todo", onClick: this.editClicked.bind(this) }),
+                        new Button({ icon: "Delete", title: "Delete Todo", onClick: this.deleteClicked.bind(this) })
                     ] })
             ] });
-        this.editView = new pglet_1.Stack({ visible: false, horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
+        this.editView = new Stack({ visible: false, horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
                 this.editName,
-                new pglet_1.Button({ text: "Save", onClick: this.saveClicked.bind(this) })
+                new Button({ text: "Save", onClick: this.saveClicked.bind(this) })
             ] });
-        this.view = new pglet_1.Stack({ childControls: [this.displayView, this.editView] });
+        this.view = new Stack({ childControls: [this.displayView, this.editView] });
     }
     editClicked(e) {
         this.editName.value = this.displayTask.label;
@@ -42,24 +51,24 @@ class TodoApp {
     constructor(page) {
         this.page = page;
         this.tasks = [];
-        this.newTask = new pglet_1.Textbox({ placeholder: "What needs doing?", width: "100%" });
-        this.tasksView = new pglet_1.Stack({});
-        this.filter = new pglet_1.Tabs({ value: "all", onChange: this.tabsChanged.bind(this), tabs: [
-                new pglet_1.Tab({ text: "all" }), new pglet_1.Tab({ text: "active" }), new pglet_1.Tab({ text: "completed" })
+        this.newTask = new Textbox({ placeholder: "What needs doing?", width: "100%" });
+        this.tasksView = new Stack({});
+        this.filter = new Tabs({ value: "all", onChange: this.tabsChanged.bind(this), tabs: [
+                new Tab({ text: "all" }), new Tab({ text: "active" }), new Tab({ text: "completed" })
             ] });
-        this.itemsLeft = new pglet_1.Text({ value: "0 items left" });
-        this.view = new pglet_1.Stack({ width: '70%', childControls: [
-                new pglet_1.Text({ value: "Todos", size: "large", align: "center" }),
-                new pglet_1.Stack({ horizontal: true, childControls: [
+        this.itemsLeft = new Text({ value: "0 items left" });
+        this.view = new Stack({ width: '70%', childControls: [
+                new Text({ value: "Todos", size: "large", align: "center" }),
+                new Stack({ horizontal: true, childControls: [
                         this.newTask,
-                        new pglet_1.Button({ primary: true, text: 'Add', onClick: this.addClicked.bind(this) })
+                        new Button({ primary: true, text: 'Add', onClick: this.addClicked.bind(this) })
                     ] }),
-                new pglet_1.Stack({ gap: '25', childControls: [
+                new Stack({ gap: '25', childControls: [
                         this.filter,
                         this.tasksView,
-                        new pglet_1.Stack({ horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
+                        new Stack({ horizontal: true, horizontalAlign: "space-between", verticalAlign: "center", childControls: [
                                 this.itemsLeft,
-                                new pglet_1.Button({ text: "Clear completed", onClick: this.clearClicked.bind(this) })
+                                new Button({ text: "Clear completed", onClick: this.clearClicked.bind(this) })
                             ] })
                     ] })
             ] });
@@ -100,12 +109,6 @@ class TodoApp {
         this.update();
     }
     async clearClicked(e) {
-        // //This approach won't work because of array iterator specification?
-        // this.tasks.forEach(async task => {
-        //     if (task.displayTask.value == true) {
-        //         await this.deleteTask(task);
-        //     }
-        // })
         for (const task of this.tasks.filter(task => task.displayTask.value == true)) {
             await this.deleteTask(task);
         }
@@ -118,4 +121,5 @@ async function main(page) {
     let app = new TodoApp(page);
     page.add([app.view]);
 }
-pglet_1.serveApp(main, { pageName: "ToDo App", web: false, noWindow: false });
+
+pglet.serveApp(main, { pageName: "ToDo App", web: false, noWindow: false });
